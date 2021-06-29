@@ -1,10 +1,12 @@
 # Covid Tracker SL
 
-This a live tracker which gives updates on latest covid stats of
+## This a live tracker which gives updates on latest covid stats of
 
 - srilanka
 - world
 
-[Created By : www.prorakabd.xyz](www.prorakabd.xyz)
+This is made with flutter
 
-[Data Source : hpb.health.gov.lk](hpb.health.gov.lk)
+[Created By : www.prorakabd.xyz](https://www.prorakabd.xyz)
+
+[Data Source : hpb.health.gov.lk](https://hpb.health.gov.lk)
