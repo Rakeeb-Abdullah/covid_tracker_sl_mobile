@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'http_request.dart';
 import 'data_model.dart';
 import 'package:intl/intl.dart';
+import 'pie_chart_pg.dart';
 
 final formatter = new NumberFormat("#,###");
 
@@ -10,13 +11,13 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primaryColor: Colors.teal,
+        primaryColor: Colors.white,
+        fontFamily: 'Poppins',
       ),
       home: DataHomeSl(),
     );
@@ -28,41 +29,45 @@ class DataHomeSl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
         appBar: AppBar(
-          toolbarHeight: 100,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(15),
-                  bottomRight: Radius.circular(15))),
+          toolbarHeight: 70,
+          elevation: 0,
           title: Row(
             children: [
-              Text('Covid Tracker '),
-              Icon(
-                Icons.coronavirus,
-                size: 40,
-              )
+              Text(
+                'Covid',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                'Tracker 🇱🇰',
+                style: TextStyle(fontWeight: FontWeight.normal),
+              ),
             ],
             mainAxisAlignment: MainAxisAlignment.center,
           ),
         ),
-        body: FutureBuilder(
-          future: httpService.getData(),
-          builder: (BuildContext context, AsyncSnapshot<Data> snapshot) {
-            if (snapshot.hasData) {
-              Data data = snapshot.data;
-              return dataCards(data);
-            } else {
-              return Center(child: CircularProgressIndicator());
-            }
-          },
+        body: Container(
+          decoration: BoxDecoration(),
+          child: FutureBuilder(
+            future: httpService.getData(),
+            builder: (BuildContext context, AsyncSnapshot<Data> snapshot) {
+              if (snapshot.hasData) {
+                Data data = snapshot.data;
+                return dataCards(data);
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            },
+          ),
         ),
-        bottomNavigationBar: bottomNavBar());
+        // persistentFooterButtons: [bottomNavBar()],
+        bottomNavigationBar: bottomNavBar(context));
   }
-
 //Bottom Nav Bar
 
-  Widget bottomNavBar() {
+
+
+  Widget bottomNavBar(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -75,7 +80,7 @@ class DataHomeSl extends StatelessWidget {
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(15), topLeft: Radius.circular(15)),
           child: BottomAppBar(
-              color: Colors.teal,
+              color: Colors.teal[300],
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Padding(
@@ -84,16 +89,29 @@ class DataHomeSl extends StatelessWidget {
                       icon: Icon(
                         Icons.flag,
                         size: 30,
-                        color: Colors.white,
+                        color: Colors.teal[700],
                       ),
                       onPressed: () {}),
                 ),
-                Text('|'),
+                Spacer(),
                 Padding(
                     padding: EdgeInsets.all(10),
                     child: IconButton(
-                        icon: Icon(Icons.public, size: 30, color: Colors.white),
-                        onPressed: () {}))
+                        icon: Icon(Icons.public,
+                            size: 30, color: Colors.teal[700]),
+                        onPressed: () {})),
+                Spacer(),
+                Padding(
+                    padding: EdgeInsets.all(10),
+                    child: IconButton(
+                        icon: Icon(Icons.pie_chart_rounded,
+                            size: 30, color: Colors.teal[700]),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChartsPage(bottomNavBar: BottomAppBar(),)));
+                        }))
               ])),
         ));
   }
@@ -101,14 +119,17 @@ class DataHomeSl extends StatelessWidget {
 // Data Card widget
 
   Widget dataCards(Data data) {
-    return GridView.count(
+    return (GridView.count(
       crossAxisCount: 2,
       crossAxisSpacing: 4,
       mainAxisSpacing: 10,
       padding: EdgeInsets.all(10),
+
+      // shrinkWrap: true,
+
       children: <Widget>[
         Card(
-          color: Colors.teal[200],
+          color: Colors.purple[200].withAlpha(200),
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -119,7 +140,7 @@ class DataHomeSl extends StatelessWidget {
               Icon(
                 Icons.coronavirus,
                 size: 50,
-                color: Colors.teal[900],
+                color: Colors.teal[100],
               ),
               Text(
                 'Cases Todays-SL:',
@@ -130,10 +151,8 @@ class DataHomeSl extends StatelessWidget {
             ],
           ),
         ),
-
-
         Card(
-          color: Colors.teal[200],
+          color: Colors.grey,
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -144,21 +163,21 @@ class DataHomeSl extends StatelessWidget {
               Icon(
                 Icons.warning_rounded,
                 size: 50,
-                color: Colors.teal[900],
+                color: Colors.teal[100],
               ),
               Text(
                 'Deaths Todays-SL:',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
               Text('${formatter.format(data.todayDeathsLk)}',
                   style: TextStyle(fontSize: 15)),
             ],
           ),
         ),
-
-
         Card(
-          color: Colors.teal[200],
+          color: Colors.blue[800].withAlpha(200),
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -169,7 +188,7 @@ class DataHomeSl extends StatelessWidget {
               Icon(
                 Icons.coronavirus_outlined,
                 size: 50,
-                color: Colors.teal[900],
+                color: Colors.teal[100],
               ),
               Text(
                 'Total Cases-SL:',
@@ -180,10 +199,8 @@ class DataHomeSl extends StatelessWidget {
             ],
           ),
         ),
-
-
         Card(
-          color: Colors.teal[200],
+          color: Colors.red[400].withAlpha(200),
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -194,7 +211,7 @@ class DataHomeSl extends StatelessWidget {
               Icon(
                 Icons.warning_amber_rounded,
                 size: 50,
-                color: Colors.teal[900],
+                color: Colors.teal[100],
               ),
               Text(
                 'Total Deaths-SL:',
@@ -205,10 +222,8 @@ class DataHomeSl extends StatelessWidget {
             ],
           ),
         ),
-
-
         Card(
-          color: Colors.teal[200],
+          color: Colors.green.withAlpha(200),
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -219,21 +234,20 @@ class DataHomeSl extends StatelessWidget {
               Icon(
                 Icons.done_rounded,
                 size: 50,
-                color: Colors.teal[900],
+                color: Colors.teal[100],
               ),
               Text(
                 'Total Recovered-SL:',
                 style: TextStyle(color: Colors.white),
+                textAlign: TextAlign.center,
               ),
               Text('${formatter.format(data.recoveredLk)}',
                   style: TextStyle(fontSize: 15)),
             ],
           ),
         ),
-
-
         Card(
-          color: Colors.teal[200],
+          color: Colors.lightBlue.withAlpha(200),
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -244,7 +258,7 @@ class DataHomeSl extends StatelessWidget {
               Icon(
                 Icons.king_bed_rounded,
                 size: 50,
-                color: Colors.teal[900],
+                color: Colors.teal[100],
               ),
               Text(
                 'Total Active-SL:',
@@ -256,6 +270,6 @@ class DataHomeSl extends StatelessWidget {
           ),
         ),
       ],
-    );
+    ));
   }
 }
