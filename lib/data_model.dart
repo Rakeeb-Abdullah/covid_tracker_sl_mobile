@@ -6,6 +6,8 @@ class Data {
   final int activeCasesLk;
   final int recoveredLk;
 
+  final String updateTime;
+
   final int totalCasesGl;
   final int todayCasesGl;
   final int totalDeathsGl;
@@ -20,6 +22,10 @@ class Data {
     this.totalDeathsLk,
     this.activeCasesLk,
     this.recoveredLk,
+
+
+    this.updateTime,
+
 
     this.recoveredGL,
     this.todayCasesGl,
@@ -38,11 +44,13 @@ class Data {
           json['data']['local_total_number_of_individuals_in_hospitals'] as int,
       recoveredLk: json['data']['local_recovered'] as int,
 
+      updateTime: json['data']['update_date_time'],
+
       recoveredGL: json['data']['global_recovered'] as int,
       todayCasesGl: json['data']['global_new_cases'] as int,
       todayDeathsGl: json['data']['global_new_deaths'] as int,
       totalCasesGl: json['data']['global_total_cases'] as int,
-      totalDeathsGl: json['data']['local_total_deaths'] as int,
+      totalDeathsGl: json['data']['global_deaths'] as int,
     );
   }
 }

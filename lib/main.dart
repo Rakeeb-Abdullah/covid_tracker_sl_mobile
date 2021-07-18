@@ -3,6 +3,7 @@ import 'http_request.dart';
 import 'data_model.dart';
 import 'package:intl/intl.dart';
 import 'pie_chart_pg.dart';
+import 'global_data.dart';
 
 final formatter = new NumberFormat("#,###");
 
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.white,
         fontFamily: 'Poppins',
@@ -30,22 +32,33 @@ class DataHomeSl extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          toolbarHeight: 70,
-          elevation: 0,
-          title: Row(
-            children: [
-              Text(
-                'Covid',
-                style: TextStyle(fontWeight: FontWeight.bold),
+            toolbarHeight: 70,
+            elevation: 0,
+            title: Column(children: [
+              Row(
+                children: [
+                  Text(
+                    'Covid',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'Tracker 🇱🇰',
+                    style: TextStyle(fontWeight: FontWeight.normal),
+                  ),
+                ],
+                mainAxisAlignment: MainAxisAlignment.center,
               ),
-              Text(
-                'Tracker 🇱🇰',
-                style: TextStyle(fontWeight: FontWeight.normal),
+              Row(
+                children: [
+                  Text(
+                    'www.prorakabd.xyz',
+                    style:
+                        TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
+                  ),
+                ],
+                mainAxisAlignment: MainAxisAlignment.center,
               ),
-            ],
-            mainAxisAlignment: MainAxisAlignment.center,
-          ),
-        ),
+            ])),
         body: Container(
           decoration: BoxDecoration(),
           child: FutureBuilder(
@@ -55,17 +68,27 @@ class DataHomeSl extends StatelessWidget {
                 Data data = snapshot.data;
                 return dataCards(data);
               } else {
-                return Center(child: CircularProgressIndicator());
+                return Container(child: Center(
+                  
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/logo_fb.png',
+                      height: 120,
+                      width: 120,
+                    ),
+                    Padding(padding: EdgeInsets.all(20),child:
+                      CircularProgressIndicator(color: Colors.teal,)),
+                  ],
+                )));
               }
             },
           ),
         ),
-        // persistentFooterButtons: [bottomNavBar()],
         bottomNavigationBar: bottomNavBar(context));
   }
 //Bottom Nav Bar
-
-
 
   Widget bottomNavBar(BuildContext context) {
     return Container(
@@ -89,29 +112,38 @@ class DataHomeSl extends StatelessWidget {
                       icon: Icon(
                         Icons.flag,
                         size: 30,
-                        color: Colors.teal[700],
+                        color: Colors.white,
                       ),
-                      onPressed: () {}),
+                      onPressed: () {
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst);
+                      }),
                 ),
                 Spacer(),
                 Padding(
                     padding: EdgeInsets.all(10),
                     child: IconButton(
-                        icon: Icon(Icons.public,
-                            size: 30, color: Colors.teal[700]),
-                        onPressed: () {})),
+                        icon: Icon(Icons.public, size: 30, color: Colors.white),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => GlobalDataPage()));
+                        })),
                 Spacer(),
                 Padding(
                     padding: EdgeInsets.all(10),
                     child: IconButton(
                         icon: Icon(Icons.pie_chart_rounded,
-                            size: 30, color: Colors.teal[700]),
+                            size: 30, color: Colors.white),
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ChartsPage(bottomNavBar: BottomAppBar(),)));
-                        }))
+                                  builder: (context) => ChartsPage(
+                                      // bottomNavBar: BottomAppBar(),
+                                      )));
+                        })),
               ])),
         ));
   }
@@ -127,9 +159,9 @@ class DataHomeSl extends StatelessWidget {
 
       // shrinkWrap: true,
 
-      children: <Widget>[
+      children: [
         Card(
-          color: Colors.purple[200].withAlpha(200),
+          color: Colors.purple,
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -143,7 +175,7 @@ class DataHomeSl extends StatelessWidget {
                 color: Colors.teal[100],
               ),
               Text(
-                'Cases Todays-SL:',
+                'Cases Todays 🇱🇰:',
                 style: TextStyle(color: Colors.white),
               ),
               Text('${formatter.format(data.todayCasesLk)}',
@@ -152,7 +184,7 @@ class DataHomeSl extends StatelessWidget {
           ),
         ),
         Card(
-          color: Colors.grey,
+          color: Colors.grey[600],
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -166,7 +198,7 @@ class DataHomeSl extends StatelessWidget {
                 color: Colors.teal[100],
               ),
               Text(
-                'Deaths Todays-SL:',
+                'Deaths Todays 🇱🇰:',
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -177,7 +209,7 @@ class DataHomeSl extends StatelessWidget {
           ),
         ),
         Card(
-          color: Colors.blue[800].withAlpha(200),
+          color: Colors.blue[800],
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -191,7 +223,7 @@ class DataHomeSl extends StatelessWidget {
                 color: Colors.teal[100],
               ),
               Text(
-                'Total Cases-SL:',
+                'Total Cases 🇱🇰:',
                 style: TextStyle(color: Colors.white),
               ),
               Text('${formatter.format(data.totalCasesLk)}',
@@ -200,7 +232,7 @@ class DataHomeSl extends StatelessWidget {
           ),
         ),
         Card(
-          color: Colors.red[400].withAlpha(200),
+          color: Colors.red,
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -214,7 +246,7 @@ class DataHomeSl extends StatelessWidget {
                 color: Colors.teal[100],
               ),
               Text(
-                'Total Deaths-SL:',
+                'Total Deaths 🇱🇰:',
                 style: TextStyle(color: Colors.white),
               ),
               Text('${formatter.format(data.totalDeathsLk)}',
@@ -223,7 +255,7 @@ class DataHomeSl extends StatelessWidget {
           ),
         ),
         Card(
-          color: Colors.green.withAlpha(200),
+          color: Colors.green,
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -237,7 +269,7 @@ class DataHomeSl extends StatelessWidget {
                 color: Colors.teal[100],
               ),
               Text(
-                'Total Recovered-SL:',
+                'Total Recovered 🇱🇰:',
                 style: TextStyle(color: Colors.white),
                 textAlign: TextAlign.center,
               ),
@@ -247,7 +279,7 @@ class DataHomeSl extends StatelessWidget {
           ),
         ),
         Card(
-          color: Colors.lightBlue.withAlpha(200),
+          color: Colors.lightBlue,
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -261,7 +293,7 @@ class DataHomeSl extends StatelessWidget {
                 color: Colors.teal[100],
               ),
               Text(
-                'Total Active-SL:',
+                'Total Active 🇱🇰:',
                 style: TextStyle(color: Colors.white),
               ),
               Text('${formatter.format(data.activeCasesLk)}',

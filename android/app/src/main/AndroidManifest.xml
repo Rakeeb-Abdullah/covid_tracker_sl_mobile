@@ -2,8 +2,8 @@
     package="com.example.covid_tracker_lk">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="covid_tracker_lk"
-        android:icon="@mipmap/ic_launcher">
+        android:label="COVID Tracker - 🇱🇰 | 🌎"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
