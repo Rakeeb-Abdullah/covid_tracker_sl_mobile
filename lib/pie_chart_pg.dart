@@ -61,7 +61,7 @@ class ChartsPage extends StatelessWidget {
     return Column(
       children: [
         Card(
-          color: Colors.yellow[100],
+          color: Colors.yellow[50],
           child: Column(
             children: [
               Padding(
@@ -93,7 +93,7 @@ class ChartsPage extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
         Card(
-          color:Colors.blue[100],
+          color:Colors.blue[50],
           child: Column(
             children: [
               Padding(

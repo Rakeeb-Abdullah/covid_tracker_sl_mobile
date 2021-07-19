@@ -59,7 +59,7 @@ class GlobalDataPage extends StatelessWidget {
 
       children: [
         Card(
-          color: Colors.purple,
+          color: Colors.purple[400],
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

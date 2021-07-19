@@ -53,7 +53,7 @@ class DataHomeSl extends StatelessWidget {
                   Text(
                     'www.prorakabd.xyz',
                     style:
-                        TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
+                        TextStyle(fontWeight: FontWeight.normal, fontSize: 10,color:Colors.black.withOpacity(0.7))
                   ),
                 ],
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -92,6 +92,7 @@ class DataHomeSl extends StatelessWidget {
 
   Widget bottomNavBar(BuildContext context) {
     return Container(
+    
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(30), topLeft: Radius.circular(30)),
@@ -100,8 +101,8 @@ class DataHomeSl extends StatelessWidget {
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(15), topLeft: Radius.circular(15)),
+          // borderRadius: BorderRadius.only(
+          //     topRight: Radius.circular(15), topLeft: Radius.circular(15)),
           child: BottomAppBar(
               color: Colors.teal[300],
               child:
@@ -109,7 +110,9 @@ class DataHomeSl extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(10),
                   child: IconButton(
+                
                       icon: Icon(
+                      
                         Icons.flag,
                         size: 30,
                         color: Colors.white,
@@ -134,7 +137,7 @@ class DataHomeSl extends StatelessWidget {
                 Padding(
                     padding: EdgeInsets.all(10),
                     child: IconButton(
-                        icon: Icon(Icons.pie_chart_rounded,
+                        icon: Icon(Icons.pie_chart,
                             size: 30, color: Colors.white),
                         onPressed: () {
                           Navigator.push(
@@ -161,7 +164,7 @@ class DataHomeSl extends StatelessWidget {
 
       children: [
         Card(
-          color: Colors.purple,
+          color: Colors.purple[400],
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
