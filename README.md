@@ -19,8 +19,13 @@ globally and locally (Sri Lanka)
 
 - **100%** true information obtained directly from [Health Promotion Bureau of Ministry of Health - Sri Lanka ](https://hpb.health.gov.lk/en)
 
+ > ### Screenshots ###
  
-
+  ![alt text](https://www.prorakabd.xyz/static/images/covid%20app%20GRAY.png)
+   ![alt text](https://www.prorakabd.xyz/static/images/covid%20app%20pages.png)
+  ![alt text](https://www.prorakabd.xyz/static/images/covid%20app%20charts.png)
+  
+  
 > Please do **Download** and if you liked it leave a **comment**, and **share** it with people who might find this useful.
 Report to us if you found any issues here 👇
 
